@@ -3,24 +3,24 @@
 require "./init/connect.php";
 $uscore = $_POST['uscore'];
 $usno = $_POST['usno'];
-foreach ($usno as $value){ 
-    if(empty($value)){
-        $value = 1111;
+for ($i=0; $i < count($usno); $i++) { 
+    if(empty($usno[$i])){
+        $usno[$i] = 1111;
     }
 }
-print_r($usno);
+// print_r($usno);
 
 // 测试数据
 // $uscore = '436';
 
-// $usno1 = '1016';
-// $usno2 = '1053';
-// $usno3 = '1056';
-// $usno4 = '1058';
-// $usno5 = '1060';
-// $usno6 = '1068';
-// $usno7 = '5019';
-// $usno8 = '5012';
+// $usno[0] = '1016';
+// $usno[1] = '1053';
+// $usno[2] = '1056';
+// $usno[3] = '1058';
+// $usno[4] = '1060';
+// $usno[5] = '1068';
+// $usno[6] = '5019';
+// $usno[7] = '5012';
 
 // 判断文理科和批次选择不同数据表
     if ($_POST['type'] =='ptl_second_li') {
@@ -48,11 +48,8 @@ print_r($usno);
         $tablename = 'dll_first_wen';
     }
 // SQL语句
-
-    // $sql = "SELECT * FROM {$tablename} WHERE sno IN ({$usno1},{$usno2},{$usno3},{$usno4},{$usno5},{$usno6},{$usno7},{$usno8})ORDER BY INSTR(',{$usno1},{$usno2},{$usno3},{$usno4},{$usno5},{$usno6},{$usno7},{$usno8},',CONCAT(',',sno,','))";
-
     $sql = "SELECT * FROM {$tablename} WHERE sno IN ($usno[0],$usno[1],$usno[2],$usno[3],$usno[4],$usno[5],$usno[6],$usno[7])ORDER BY INSTR(',$usno[0],$usno[1],$usno[2],$usno[3],$usno[4],$usno[5],$usno[6],$usno[7],',CONCAT(',',sno,','))";
-    echo "$sql".'<br>';
+    // echo "$sql".'<br>';
 
 	$mysql_result = $db -> query($sql);
 
@@ -62,10 +59,7 @@ print_r($usno);
 	    $rows[] = $row;
     }
         // print_r($rows);
-    
-    
-    // print_r($scores);
-    
+        // print_r($scores);
 ?>
 <!DOCTYPE html>
 <html>
